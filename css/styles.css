@@ -63,7 +63,14 @@ body.black-mode ::selection { background: #e0e0e0; color: #1f1f1f; }
 .header-photo {
     display: flex;
     justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.photo-column {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 12px;
 }
 
 .profile-photo-frame {
@@ -126,6 +133,26 @@ body.black-mode .profile-photo-img-robot {
 
 body.black-mode .profile-photo-img-human {
     opacity: 1;
+}
+
+.photo-caption {
+    font-size: 0.75rem;
+    max-width: 220px;
+    text-align: center;
+    line-height: 1.4;
+    font-style: italic;
+    font-family: inherit;
+    transition: opacity 0.4s ease;
+    
+    /* Default hidden */
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Show caption only in Human (black) mode on hover over the photo column */
+body.black-mode .photo-column:hover .photo-caption {
+    opacity: 0.8;
+    pointer-events: auto;
 }
 
 .header h1 {
@@ -429,5 +456,3 @@ body.white-mode .bookmark-right { pointer-events: auto; }
     body.black-mode .content-wrapper { padding-left: 80px; padding-right: 20px; }
     .header h1 { font-size: 2.5rem; }
 }
-
-
