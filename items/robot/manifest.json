@@ -1,8 +1,8 @@
 [
   "rl-visualization-brax.html",
-  "vision-guided-scara.html",
-  "real-time-blink-detection.html",
-  "hexapod-spider-robot.html",
   "llm-reliability-finance.html",
+  "real-time-blink-detection.html",
+  "vision-guided-scara.html",
+  "hexapod-spider-robot.html",
   "delta.html"
 ]
