@@ -1,0 +1,159 @@
+cv:
+  name: Shouyue (Bruce) Hu
+  label: Robotics MSE student, Johns Hopkins University
+  email: bruce.shouyue.hu@gmail.com
+  location: Baltimore, MD
+  image: ""
+  summary: "I design models that describe physical phenomena and predict what happens next. My work focuses on GPU physics simulation of soft tissue and surgical tools for tissue manipulation, cutting, needle insertion and suturing. These simulations let a surgical robot anticipate how tissue will respond before it acts, generate synthetic data for training learning-based models, and serve as a testbed for medical devices and for evaluating surgical robot autonomy."
+
+  social_networks:
+    - network: GitHub
+      username: bsyh
+    - network: LinkedIn
+      username: brucesh
+
+  sections:
+    Education:
+      - institution: Johns Hopkins University
+        location: Baltimore, MD, USA
+        url: https://www.jhu.edu/
+        area: Robotics
+        studyType: Master of Science in Engineering
+        start_date: 2025-09
+        end_date: 2027-05
+
+      - institution: Queen's University
+        location: Kingston, ON, Canada
+        url: https://www.queensu.ca/
+        area: Computing (Honours, Distinction), Minor in Mathematics, AI Concentration
+        studyType: Bachelor of Computing
+        start_date: 2018-09
+        end_date: 2022-06
+        highlights:
+          - "GPA: 3.8; Dean's Honour List; Queen's Excellence Scholarship"
+          - Varsity Fencing (OUA Championships), Academic All-Star
+
+    Publications:
+      - title: Simulating soft-tissue deformation and electrocautery for robotic partial nephrectomy
+        publisher: Under review (implemented the tissue deformation model)
+        releaseDate: 2027
+      - title: "ARTS: An Open-Source, Reproducible Three-Arm Platform for Autonomy Research in Minimally Invasive Surgery"
+        authors:
+          - J. Ge
+          - C. Kim
+          - A. Goldenberg
+          - D. McDonough
+          - J. Liao
+          - B. Ning
+          - S. Ladstaetter
+          - K. Van Anderlecht
+          - H. Ding
+          - L. Connolly
+          - E. Kilmer
+          - F. Fan
+          - "**S. Hu**"
+          - T. Salvador
+          - B. Burkhart
+          - P. Henrich
+          - R. Cha
+          - T. Porras
+          - M. Unberath
+          - K. Cleary
+          - A. Krieger
+        publisher: "arXiv preprint arXiv:2611.15135 (contributed the simulation)"
+        releaseDate: 2026
+        url: https://arxiv.org/abs/2611.15135
+      - title: Leveraging Material Point Method Simulation to Improve Accuracy in Autonomous Robotic Soft Tissue Cutting
+        authors:
+          - E. Kilmer
+          - M. E. Smith
+          - "**S. Hu**"
+          - A. Krieger
+        publisher: Hamlyn Symposium on Medical Robotics (HSMR) 2026, extended abstract, oral presentation
+        releaseDate: 2026
+
+    Experience:
+      - company: IMERSE Lab, Johns Hopkins University (advisor Axel Krieger)
+        position: Research Assistant
+        location: Baltimore, MD, USA
+        start_date: 2025-11
+        end_date: present
+        highlights:
+          - Real-time simulation that predicts tissue deformation and electrosurgical cutting before the robot cuts; 20 Hz on a 178k-particle porcine tongue model, used to improve autonomous cutting accuracy (HSMR 2026).
+          - Tissue deformation and electrocautery model for partial nephrectomy, with parameter inference from CT scans, validated on ex vivo kidney.
+          - Contributed simulation to ARTS, an open-source three-arm laparoscopic robot platform for surgical autonomy research (arXiv:2611.15135).
+
+      - company: Inner Logic (advisors Gašper Podobnik, Peter Kazanzides)
+        position: Intern, Surgical Simulation
+        location: Baltimore, MD, USA
+        start_date: 2026-08
+        end_date: present
+        highlights:
+          - "GPU physics engine for surgical simulation on NVIDIA Warp / Newton: real-time tissue cutting, needle insertion, suturing and knot tying with teleoperation."
+          - Reinforcement learning and imitation learning policies for autonomous suturing in diverse anatomical models.
+          - Inverse kinematics, remote-center-of-motion (RCM) control and IMU filtering for handheld teleoperation.
+
+      - company: PAL Robotics (Google Summer of Code)
+        position: Open-source Developer
+        location: Remote
+        start_date: 2025-06
+        end_date: 2025-09
+        highlights:
+          - Frame-by-frame, JAX-native live visualizer for Brax, making parallel multi-GPU PPO training observable in real time.
+
+      - company: Wharton Research Data Services, University of Pennsylvania
+        position: Machine Learning Intern
+        location: Philadelphia, PA, USA
+        start_date: 2024-11
+        end_date: 2025-04
+        highlights:
+          - Automated annotation of a 103k financial-document dataset with a hybrid LLM and embedding-statistics model, replacing manual labeling.
+
+      - company: Delta Controls Inc.
+        position: Software Engineer Intern in Research
+        location: Surrey, BC, Canada
+        start_date: 2023-01
+        end_date: 2024-03
+        highlights:
+          - Shipped R&D prototypes as production IoT control services (Python/Flask, PostgreSQL); cut API run-time by 58% under ~6,000 concurrent tasks.
+
+      - company: École de technologie supérieure (advisor David St-Onge)
+        position: Research Assistant
+        location: Montréal, QC, Canada
+        start_date: 2023-02
+        end_date: 2023-08
+        highlights:
+          - Dynamic-programming blink detection that removes the redundant computation of sliding-window methods; 50 Hz on embedded devices.
+          - ROS package for an eye-tracking device and CNN classifiers of cognitive load from audio spectrograms.
+
+      - company: Shuangyuan Optoelectronics Tech Co., Ltd.
+        position: Robotics Engineer Intern
+        location: Guangdong, China
+        start_date: 2021-07
+        end_date: 2021-08
+        highlights:
+          - "Vision-guided SCARA pick-and-place system with sub-millimeter repeatability: actuators, CAD, distributed control software, hand-eye calibration."
+
+    Awards:
+
+      - title: Best Demo, 1st Place, Haptic Interface Design
+        date: 2025
+        awarder: Johns Hopkins University
+
+      - title: Dean's Honour List; Queen's Academic All-Star
+        date: 2022
+        awarder: Queen's University
+
+      - title: Queen's Excellence Scholarship
+        date: 2018
+        awarder: Queen's University
+
+    Skills:
+      - name: Simulation
+        keywords: "NVIDIA Warp, Newton, Isaac Sim, SOFA, MuJoCo, Brax, Gazebo"
+      - name: Learning
+        keywords: "PyTorch, TensorFlow, JAX, XGBoost"
+      - name: Robotics
+        keywords: "ROS, dVRK, URDF/OpenUSD"
+      - name: Languages
+        keywords: "Python, C/C++, JavaScript, Java, Matlab"
