@@ -1,0 +1,182 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Differentiable Simulation for Soft Tissue Cutting | Shouyue (Bruce) Hu </title> <meta name="author" content="Shouyue (Bruce) Hu"> <meta name="description" content="Inferring tissue stiffness and its uncertainty from observed cuts · Computer Integrated Surgery II"> <meta name="keywords" content="robotics, simulation, surgical robotics, soft tissue simulation, MPM, NVIDIA Warp, Johns Hopkins"> <meta property="og:site_name" content="Shouyue (Bruce) Hu"> <meta property="og:type" content="website"> <meta property="og:title" content="Shouyue (Bruce) Hu | Differentiable Simulation for Soft Tissue Cutting"> <meta property="og:url" content="https://hushouyue.github.io/projects/03_diff_sysid/"> <meta property="og:description" content="Inferring tissue stiffness and its uncertainty from observed cuts · Computer Integrated Surgery II"> <meta property="og:image" content="https://hushouyue.github.io/assets/img/prof_pic.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Differentiable Simulation for Soft Tissue Cutting"> <meta name="twitter:description" content="Inferring tissue stiffness and its uncertainty from observed cuts · Computer Integrated Surgery II"> <meta name="twitter:image" content="https://hushouyue.github.io/assets/img/prof_pic.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Shouyue (Bruce) Hu"
+        },
+        "url": "https://hushouyue.github.io/projects/03_diff_sysid/",
+        "@type": "WebSite",
+        "description": "Inferring tissue stiffness and its uncertainty from observed cuts · Computer Integrated Surgery II",
+        "headline": "Differentiable Simulation for Soft Tissue Cutting",
+        
+        "sameAs": ["https://github.com/bsyh","https://www.linkedin.com/in/brucesh"],
+        
+        "name": "Shouyue (Bruce) Hu",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.ico?v=62a0d6390d90498f27660e5dbfe1942a"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://hushouyue.github.io/projects/03_diff_sysid/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Shouyue</span> (Bruce) Hu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/interests/">interests </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Differentiable Simulation for Soft Tissue Cutting</h1> <p class="post-description">Inferring tissue stiffness and its uncertainty from observed cuts · Computer Integrated Surgery II</p> </header> <article> <p><strong>Course project, Computer Integrated Surgery II, Johns Hopkins University</strong> · Jan. 2026 – May 2026 · Mentors: Ethan Kilmer, Dr. Jiawei Ge, Dr. Laura Connolly and Prof. Axel Krieger · <a href="/assets/pdf/cis2_final_report.pdf">Final report (PDF)</a> · <a href="/assets/pdf/diff_sim_soft_tissue_poster.pdf">Poster (PDF)</a></p> <h3 id="motivation">Motivation</h3> <p>In partial nephrectomy the surgeon removes a kidney tumor with a margin of healthy tissue around it. A margin that is too close risks leaving cancer behind; one that is too wide removes kidney function the patient needs. Autonomous robots can cut more precisely than a human hand, but they cannot feel what the tissue will do: it deforms under the tool, and the electrosurgical instrument denatures tissue by heat as it cuts. My <a href="/projects/01_mpm_tissue_cutting/">RA work</a> builds a real-time MPM simulation that predicts this tool–tissue interaction. For its predictions to be useful, the model’s parameters have to match the patient’s tissue — this course project asks how to infer them from what the robot observes.</p> <div class="row justify-content-sm-center"> <div class="col-sm-4 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/sysid_margin-480.webp 480w,/assets/img/projects/sysid_margin-800.webp 800w,/assets/img/projects/sysid_margin-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/sysid_margin.jpg" class="img-fluid rounded" width="100%" height="auto" title="Resection margin" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> The resection margin (red) must fully enclose the tumor. </div> <h3 id="why-a-new-cutting-model">Why a new cutting model</h3> <p>Mesh-based simulators such as SOFA <a class="citation" href="#faure2012sofa">(Faure et al., 2012)</a> cut by deleting tetrahedra. At practical resolutions this leaves jagged, aliased edges and unrealistic deformation around the cut. CRESSim-MPM <a class="citation" href="#ou2025cressim">(Ou &amp; Tavakoli, 2025)</a> uses the Material Point Method but assumes planar slicing by a blade, which does not fit a needle-like electrosurgical tip.</p> <div class="row justify-content-sm-center"> <div class="col-sm-8 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/sysid_sofa-480.webp 480w,/assets/img/projects/sysid_sofa-800.webp 800w,/assets/img/projects/sysid_sofa-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/sysid_sofa.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="SOFA carving" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Cutting by tetrahedron deletion in SOFA: the incision edge is jagged at practical mesh resolutions. </div> <h3 id="cutting-model">Cutting model</h3> <p>I represent tissue as Neo-Hookean MPM particles. Instead of deleting particles or pushing them aside, each particle carries a health value \(h_i \in [0, 1]\). The cautery mesh induces a Gaussian thermal field of width \(\sigma_\text{thermal}\), and health decays with exposure:</p> \[\Delta h_i = -\kappa \sum_{j} \exp\!\left(-\frac{\lVert x_i - v_j \rVert^2}{2\sigma_\text{thermal}^2}\right), \qquad \sigma_i^\text{eff} = h_i\,\sigma_i^\text{NH}.\] <p>Scaling each particle’s stress by its health makes fully denatured particles stop transmitting force, so they separate — a cut. Because nothing is deleted, momentum is conserved and the whole process stays differentiable — which is what makes the inverse problem below possible. (Comparisons against real cuts are on the <a href="/projects/01_mpm_tissue_cutting/">RA project page</a>.)</p> <h3 id="inferring-stiffness">Inferring stiffness</h3> <p>Tissue stiffness (Young’s modulus \(E\)) cannot be measured directly, so it is inferred from deformation: the optimizer adjusts \(E\) until the simulated particle positions \(\hat{x} = \text{MPM}(E)\) match the observed positions \(x\). \(E\) is modeled as a field with one value per particle, and optimized in log space, \(E_i = \exp(z_i)\), because stiffness spans orders of magnitude and raw values cause exploding gradients.</p> <p>Real surgical observations are noisy — reflections, blood, smoke. Rather than a single best estimate, the method keeps a distribution \(q(z)\) over log-stiffness and minimizes the negative evidence lower bound, which balances fit to the observation against a medical prior. Gradients flow through every simulation step by automatic differentiation.</p> <h3 id="uncertainty-map">Uncertainty map</h3> <p>The method also learns a per-particle standard deviation \(s_i\) in the likelihood. Where the observation agrees with physics, \(s_i\) stays small and the fit is strict; where it is corrupted, the optimizer raises \(s_i\) there, which down-weights that region instead of letting it distort the stiffness estimate. The result is an honest map of where the simulation can and cannot be trusted — a robot could use it to stop a risky incision.</p> <p>To test this, I injected a synthetic error into one region of the kidney. The converged uncertainty map lights up exactly there.</p> <div class="row justify-content-sm-center"> <div class="col-sm-6 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/sysid_uncertainty-480.webp 480w,/assets/img/projects/sysid_uncertainty-800.webp 800w,/assets/img/projects/sysid_uncertainty-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/sysid_uncertainty.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Uncertainty map" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Perturbation test: three views of the kidney, colored by the learned standard deviation. The injected error (red circle) is flagged as high uncertainty. </div> <h3 id="results">Results</h3> <p>On synthetic data, deformation error shrinks across the kidney as the stiffness estimate converges to the ground truth, for spin, drop and throw scenarios. Both the deterministic estimate and the probabilistic version (mean with a confidence band) converge to the true value.</p> <div class="row justify-content-sm-center"> <div class="col-sm-10 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/sysid_error_map-480.webp 480w,/assets/img/projects/sysid_error_map-800.webp 800w,/assets/img/projects/sysid_error_map-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/sysid_error_map.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Temporal error map" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="row"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/sysid_E_det-480.webp 480w,/assets/img/projects/sysid_E_det-800.webp 800w,/assets/img/projects/sysid_E_det-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/sysid_E_det.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Deterministic estimate" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/sysid_E_prob-480.webp 480w,/assets/img/projects/sysid_E_prob-800.webp 800w,/assets/img/projects/sysid_E_prob-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/sysid_E_prob.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Probabilistic estimate" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Top: temporal error map — mean particle deviation over simulation steps (x) and epochs (y). Bottom left: deterministic estimate of E converging to ground truth. Bottom right: the probabilistic estimate, mean and 5th–95th percentile band. </div> <p><strong>Speed.</strong> The simulation is built on Genesis <a class="citation" href="#genesis2024">(Genesis Authors, 2024)</a>, with the thermal model in Taichi <a class="citation" href="#hu2019taichi">(Hu et al., 2019)</a> and inference in PyTorch. One inference iteration on 178k particles — forward rollout, loss and backpropagation through every step — takes 14.7 s.</p> <p><strong>Scope.</strong> This is a sim-to-sim study: the observations are generated by the simulator with known parameters, so the inverse problem is checked against a known ground truth. Fitting to real tissue data is the next step, along with thermography to calibrate the thermal model and using the uncertainty map as a cost map for robot planning.</p> <div class="row"> <div class="col-sm mt-3 mt-md-0"> <a href="/assets/pdf/diff_sim_soft_tissue_poster.pdf"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/sysid_poster-480.webp 480w,/assets/img/projects/sysid_poster-800.webp 800w,/assets/img/projects/sysid_poster-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/sysid_poster.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="CIS II poster" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </a> </div> </div> <div class="caption"> Project poster, Computer Integrated Surgery II, Spring 2026. Click to open the PDF. </div> <h3 id="follow-up-exact-gradients-in-nvidia-warp">Follow-up: exact gradients in NVIDIA Warp</h3> <p>I later rebuilt the inverse problem on an explicit MLS-MPM <a class="citation" href="#hu2018mlsmpm">(Hu et al., 2018)</a> solver in NVIDIA Warp <a class="citation" href="#macklin2022warp">(Macklin, 2022)</a>, backpropagating the trajectory loss through every substep with Warp’s reverse-mode autodiff. On a soft kidney drop (~2,500 particles, 540 substeps), Adam <a class="citation" href="#kingma2015adam">(Kingma &amp; Ba, 2015)</a> on log E recovers Young’s modulus from a 10× wrong initial guess (10<sup>4</sup> → 10<sup>5</sup> Pa) to within <strong>0.08%</strong> in 60 epochs, at ~0.38 s per epoch on an RTX 2080.</p> <div class="row"> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/assets/video/warp_E_epoch_001.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" loop="" muted=""></video> </figure> </div> </div> <div class="row"> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/assets/video/warp_E_epoch_060.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" loop="" muted=""></video> </figure> </div> </div> <div class="caption"> Ground truth | initial guess | current estimate, at epoch 1 (top) and epoch 60 (bottom). By epoch 60 the simulated drop matches the ground truth. </div> <div class="row justify-content-sm-center"> <div class="col-sm-10 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/warp_E_training-480.webp 480w,/assets/img/projects/warp_E_training-800.webp 800w,/assets/img/projects/warp_E_training-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/warp_E_training.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Training summary" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Position loss, recovered E, relative error and gradient over training. </div> <h4 id="references">References</h4> <div class="publications"> <ol class="bibliography"> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="faure2012sofa" class="col-sm-8"> <div class="title">SOFA: A Multi-Model Framework for Interactive Physical Simulation</div> <div class="author"> François Faure, Christian Duriez, Hervé Delingette, Jérémie Allard, Benjamin Gilles, Stéphanie Marchesseau, Hugo Talbot, Hadrien Courtecuisse, Guillaume Bousquet, Igor Peterlik, and others </div> <div class="periodical"> <em>In Soft Tissue Biomechanical Modeling for Computer Assisted Surgery</em>, 2012 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="ou2025cressim" class="col-sm-8"> <div class="title">CRESSim-MPM: A Material Point Method Library for Surgical Soft Body Simulation with Cutting and Suturing</div> <div class="author"> Yafei Ou and Mahdi Tavakoli </div> <div class="periodical"> <em>In IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</em>, 2025 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="genesis2024" class="col-sm-8"> <div class="title">Genesis: A Generative and Universal Physics Engine for Robotics and Beyond</div> <div class="author"> Genesis Authors </div> <div class="periodical"> 2024 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="hu2019taichi" class="col-sm-8"> <div class="title">Taichi: A Language for High-Performance Computation on Spatially Sparse Data Structures</div> <div class="author"> Yuanming Hu, Tzu-Mao Li, Luke Anderson, Jonathan Ragan-Kelley, and Frédo Durand </div> <div class="periodical"> <em>ACM Transactions on Graphics</em>, 2019 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="hu2018mlsmpm" class="col-sm-8"> <div class="title">A Moving Least Squares Material Point Method with Displacement Discontinuity and Two-Way Rigid Body Coupling</div> <div class="author"> Yuanming Hu, Yu Fang, Ziheng Ge, Ziyin Qu, Yixin Zhu, Andre Pradhana, and Chenfanfu Jiang </div> <div class="periodical"> <em>ACM Transactions on Graphics</em>, 2018 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="macklin2022warp" class="col-sm-8"> <div class="title">Warp: A High-performance Python Framework for GPU Simulation and Graphics</div> <div class="author"> Miles Macklin </div> <div class="periodical"> 2022 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="kingma2015adam" class="col-sm-8"> <div class="title">Adam: A Method for Stochastic Optimization</div> <div class="author"> Diederik P. Kingma and Jimmy Ba </div> <div class="periodical"> <em>In International Conference on Learning Representations (ICLR)</em>, 2015 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> </ol> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Shouyue (Bruce) Hu. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-projects",
+          title: "projects",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-interests",
+          title: "interests",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/interests/";
+          },
+        },{id: "news-my-live-training-viewer-for-brax-built-with-pal-robotics-during-google-summer-of-code-2025-was-released-as-open-source",
+          title: 'My live training viewer for Brax, built with PAL Robotics during Google Summer...',
+          description: "",
+          section: "News",},{id: "news-started-the-robotics-mse-program-at-johns-hopkins-university",
+          title: 'Started the Robotics MSE program at Johns Hopkins University.',
+          description: "",
+          section: "News",},{id: "news-joined-the-imerse-lab-at-johns-hopkins-as-a-graduate-researcher-working-on-soft-tissue-physics-simulation-for-robot-assisted-surgery",
+          title: 'Joined the IMERSE Lab at Johns Hopkins as a graduate researcher, working on...',
+          description: "",
+          section: "News",},{id: "news-our-haptic-force-cepx-grip-feedback-device-won-best-demo-1st-place-in-jhu-haptic-interface-design",
+          title: 'Our Haptic Force-Cepx grip-feedback device won Best Demo, 1st place in JHU Haptic...',
+          description: "",
+          section: "News",},{id: "news-our-mpm-tissue-cutting-extended-abstract-was-presented-as-an-oral-at-the-hamlyn-symposium-on-medical-robotics-2026",
+          title: 'Our MPM tissue-cutting extended abstract was presented as an oral at the Hamlyn...',
+          description: "",
+          section: "News",},{id: "news-started-as-an-intern-in-surgical-simulation-at-inner-logic",
+          title: 'Started as an intern in surgical simulation at Inner Logic.',
+          description: "",
+          section: "News",},{id: "projects-real-time-mpm-tissue-cutting-simulation",
+          title: 'Real-time MPM Tissue Cutting Simulation',
+          description: "Predicting tissue deformation and electrosurgical cutting before the robot cuts · IMERSE Lab, JHU",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/01_mpm_tissue_cutting/";
+            },},{id: "projects-surgical-suturing-simulation",
+          title: 'Surgical Suturing Simulation',
+          description: "Deformation, cutting, needle insertion and knot tying in one real-time scene",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/02_suturing_sim/";
+            },},{id: "projects-differentiable-simulation-for-soft-tissue-cutting",
+          title: 'Differentiable Simulation for Soft Tissue Cutting',
+          description: "Inferring tissue stiffness and its uncertainty from observed cuts · Computer Integrated Surgery II",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/03_diff_sysid/";
+            },},{id: "projects-haptic-force-cepx",
+          title: 'Haptic Force‑Cepx',
+          description: "Real-time simulation and grip-feedback device for da Vinci surgical training · Best Demo, 1st place",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/04_haptic_forceps/";
+            },},{id: "projects-shunt-valve-artifact-and-catheter-length-in-mri",
+          title: 'Shunt Valve Artifact and Catheter Length in MRI',
+          description: "Deep learning artifact segmentation and active-snake catheter length estimation · Medical Image Analysis",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/04a_mri_catheter/";
+            },},{id: "projects-live-training-visualizer-for-brax",
+          title: 'Live Training Visualizer for Brax',
+          description: "Open-source developer, Google Summer of Code 2025 · PAL Robotics",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/05_brax_viewer/";
+            },},{id: "projects-real-time-blink-detection",
+          title: 'Real-time Blink Detection',
+          description: "Embedded eye tracking and cognitive-load sensing · ÉTS Montréal",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/06_blink_detection/";
+            },},{id: "projects-vision-guided-scara-pick-and-place",
+          title: 'Vision-Guided SCARA Pick-and-Place',
+          description: "Low-cost industrial arm with sub-millimeter repeatability · Shuangyuan Optoelectronics",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/09_scara/";
+            },},{id: "projects-hexapod-spider-robot",
+          title: 'Hexapod Spider Robot',
+          description: "Porting an open-source hexapod to Raspberry Pi, with redesigned parts and remote control · Personal project",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/10_hexapod/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%62%72%75%63%65.%73%68%6F%75%79%75%65.%68%75@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/bsyh", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/brucesh", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

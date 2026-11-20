@@ -1,0 +1,182 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Shunt Valve Artifact and Catheter Length in MRI | Shouyue (Bruce) Hu </title> <meta name="author" content="Shouyue (Bruce) Hu"> <meta name="description" content="Deep learning artifact segmentation and active-snake catheter length estimation · Medical Image Analysis"> <meta name="keywords" content="robotics, simulation, surgical robotics, soft tissue simulation, MPM, NVIDIA Warp, Johns Hopkins"> <meta property="og:site_name" content="Shouyue (Bruce) Hu"> <meta property="og:type" content="website"> <meta property="og:title" content="Shouyue (Bruce) Hu | Shunt Valve Artifact and Catheter Length in MRI"> <meta property="og:url" content="https://hushouyue.github.io/projects/04a_mri_catheter/"> <meta property="og:description" content="Deep learning artifact segmentation and active-snake catheter length estimation · Medical Image Analysis"> <meta property="og:image" content="https://hushouyue.github.io/assets/img/prof_pic.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Shunt Valve Artifact and Catheter Length in MRI"> <meta name="twitter:description" content="Deep learning artifact segmentation and active-snake catheter length estimation · Medical Image Analysis"> <meta name="twitter:image" content="https://hushouyue.github.io/assets/img/prof_pic.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Shouyue (Bruce) Hu"
+        },
+        "url": "https://hushouyue.github.io/projects/04a_mri_catheter/",
+        "@type": "WebSite",
+        "description": "Deep learning artifact segmentation and active-snake catheter length estimation · Medical Image Analysis",
+        "headline": "Shunt Valve Artifact and Catheter Length in MRI",
+        
+        "sameAs": ["https://github.com/bsyh","https://www.linkedin.com/in/brucesh"],
+        
+        "name": "Shouyue (Bruce) Hu",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.ico?v=62a0d6390d90498f27660e5dbfe1942a"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://hushouyue.github.io/projects/04a_mri_catheter/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Shouyue</span> (Bruce) Hu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/interests/">interests </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Shunt Valve Artifact and Catheter Length in MRI</h1> <p class="post-description">Deep learning artifact segmentation and active-snake catheter length estimation · Medical Image Analysis</p> </header> <article> <p><strong>Course project, Medical Image Analysis, Johns Hopkins University</strong> · Spring 2026 · <a href="/assets/pdf/mri_shunt_catheter_report.pdf">Report (PDF)</a></p> <p>Two-person team. I built the learning-based valve artifact segmentation (Task A) and all of catheter length estimation (Task C), including the active medial snake and evaluation. My teammate Runyu built the classical pipelines and the catheter segmentation (Task B).</p> <h3 id="background">Background</h3> <p>In hydrocephalus, cerebrospinal fluid builds up in the brain’s ventricles faster than it is absorbed, raising intracranial pressure. The standard treatment is a shunt: a catheter drains fluid from a ventricle to the abdomen, through a one-way valve under the scalp. Shunts can block, disconnect or migrate, so patients are imaged repeatedly and the catheter’s position is checked at follow-up.</p> <p>Many valves contain magnets and other metal. In MRI this produces a dark signal void with geometric distortion around the valve — and because the valve sits where the catheter enters the skull, the artifact can also hide the start of the catheter. The project splits the problem into three tasks: <strong>(A)</strong> find the valve artifact, <strong>(B)</strong> segment the catheter, and <strong>(C)</strong> estimate the catheter’s length. The course provided 200 training subjects, each with an MRI volume, an artifact mask and a catheter mask, plus 30 test subjects.</p> <div class="row justify-content-sm-center"> <div class="col-sm-12 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/mri_data-480.webp 480w,/assets/img/projects/mri_data-800.webp 800w,/assets/img/projects/mri_data-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/mri_data.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Example data" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Course-provided data. (a) A slice without the artifact; (b) the valve artifact, a dark signal void (arrow); (c) its mask in red; (d) a slice where the catheter is visible; (e) the catheter mask in cyan. </div> <h3 id="task-a--valve-artifact-segmentation">Task A — valve artifact segmentation</h3> <p>The artifact is a dark, compact void near the skull. A classical pipeline built on that cue — head mask, erosion, dark-pixel candidates, then an area and circularity filter — reached Dice <strong>0.68</strong>, but it was sensitive to kernel sizes and thresholds and failed when the artifact merged with the skull outline.</p> <p>I trained a compact 3D U-Net <a class="citation" href="#cicek2016unet3d">(Çiçek et al., 2016)</a> instead. Volumes of different sizes are normalized and resampled to 64³ (trilinear for images, nearest-neighbour for masks), then the prediction is resampled back and thresholded at 0.5. I compared a single-stage schedule (45 epochs of Dice loss) with a two-stage one (30 epochs of Dice + cross-entropy, then 15 of pure Dice). Both reached about <strong>0.90</strong> Dice on validation, the two-stage schedule slightly ahead.</p> <div class="row"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/mri_valve-480.webp 480w,/assets/img/projects/mri_valve-800.webp 800w,/assets/img/projects/mri_valve-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/mri_valve.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Valve artifact detection" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/mri_dice-480.webp 480w,/assets/img/projects/mri_dice-800.webp 800w,/assets/img/projects/mri_dice-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/mri_dice.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Validation Dice" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Left: an axial slice and the detected artifact. Right: validation Dice for the single-stage and two-stage training schedules. </div> <h3 id="task-b--catheter-segmentation">Task B — catheter segmentation</h3> <p>Classical attempts — 3D template matching and region growing guided by Frangi tubular enhancement, anchored at the ventricles — struggled to generalize across valve shapes and often confused the catheter with sulci. nnU-Net <a class="citation" href="#isensee2021nnunet">(Isensee et al., 2021)</a>, which configures itself from the dataset’s resolution and intensity statistics, reached an average Dice of <strong>0.85</strong>.</p> <h3 id="task-c--catheter-length">Task C — catheter length</h3> <p>Length is computed from the catheter mask and the voxel spacing, and scored by mean absolute error against reference lengths.</p> <p><strong>Baseline.</strong> Thin the mask to a one-voxel skeleton, order the voxels along their principal axis, fit a cubic B-spline and sum its length. A single spline fit is sensitive to noisy or uneven masks: the skeleton zig-zags, and the zig-zags add length.</p> <div class="row justify-content-sm-center"> <div class="col-sm-8 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/mri_zigzag-480.webp 480w,/assets/img/projects/mri_zigzag-800.webp 800w,/assets/img/projects/mri_zigzag-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/mri_zigzag.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Zig-zag skeleton" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> A B-spline fitted to a noisy skeleton follows its zig-zags. </div> <p><strong>Active medial snake.</strong> Inspired by active contours <a class="citation" href="#kass1988snakes">(Kass et al., 1988)</a>, I let an open curve adapt to each patient’s catheter. It starts from the skeleton’s endpoints and is pulled toward the middle of the tube by a force field built from smoothed inside and outside distance transforms. The curve is optimized through a few control points, re-parameterized as a dense B-spline at each step, with a Laplacian term for smoothness, until it converges.</p> <div class="row"> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/assets/video/mri_snake_evolution.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" loop="" muted=""></video> </figure> </div> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/assets/video/mri_length_3d.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls="" loop="" muted=""></video> </figure> </div> </div> <div class="caption"> Left: the snake evolving along the catheter on the distance field. Right: the baseline B-spline (green) zig-zags on the noisy mask, while the snake (red) follows the catheter smoothly. </div> <p><strong>Result.</strong> Over the 200 training subjects, the snake cut the mean absolute error from 2.75 ± 2.10 mm to <strong>1.57 ± 1.36 mm</strong>, with lower variance across subjects.</p> <div class="row justify-content-sm-center"> <div class="col-sm-4 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/mri_length_mae-480.webp 480w,/assets/img/projects/mri_length_mae-800.webp 800w,/assets/img/projects/mri_length_mae-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/mri_length_mae.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Length error" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="col-sm-3 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/mri_failure-480.webp 480w,/assets/img/projects/mri_failure-800.webp 800w,/assets/img/projects/mri_failure-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/mri_failure.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Failure case" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Left: length error of the two methods. Right: a failure case, where artifact voxels wrongly included in the mask pull the snake off course. </div> <h3 id="what-i-would-do-differently">What I would do differently</h3> <p>The project demo exposed two gaps. The catheter segment hidden under the valve artifact matters for length: if it is missing from the mask, neither the skeleton nor the snake can recover it, and I deliberately did not fill the gap without a clinical prior. And the catheter tip matters, because stable endpoints anchor the snake. Next steps would be an explicit tip model, a principled way to bridge the occluded segment, and a larger Task A network for sharper boundaries.</p> <h4 id="references">References</h4> <div class="publications"> <ol class="bibliography"> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="cicek2016unet3d" class="col-sm-8"> <div class="title">3D U-Net: Learning Dense Volumetric Segmentation from Sparse Annotation</div> <div class="author"> Özgün Çiçek, Ahmed Abdulkadir, Soeren S. Lienkamp, Thomas Brox, and Olaf Ronneberger </div> <div class="periodical"> <em>In Medical Image Computing and Computer-Assisted Intervention (MICCAI)</em>, 2016 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="isensee2021nnunet" class="col-sm-8"> <div class="title">nnU-Net: a self-configuring method for deep learning-based biomedical image segmentation</div> <div class="author"> Fabian Isensee, Paul F. Jaeger, Simon A. A. Kohl, Jens Petersen, and Klaus H. Maier-Hein </div> <div class="periodical"> <em>Nature Methods</em>, 2021 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="kass1988snakes" class="col-sm-8"> <div class="title">Snakes: Active Contour Models</div> <div class="author"> Michael Kass, Andrew Witkin, and Demetri Terzopoulos </div> <div class="periodical"> <em>International Journal of Computer Vision</em>, 1988 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li> </ol> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Shouyue (Bruce) Hu. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-projects",
+          title: "projects",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-interests",
+          title: "interests",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/interests/";
+          },
+        },{id: "news-my-live-training-viewer-for-brax-built-with-pal-robotics-during-google-summer-of-code-2025-was-released-as-open-source",
+          title: 'My live training viewer for Brax, built with PAL Robotics during Google Summer...',
+          description: "",
+          section: "News",},{id: "news-started-the-robotics-mse-program-at-johns-hopkins-university",
+          title: 'Started the Robotics MSE program at Johns Hopkins University.',
+          description: "",
+          section: "News",},{id: "news-joined-the-imerse-lab-at-johns-hopkins-as-a-graduate-researcher-working-on-soft-tissue-physics-simulation-for-robot-assisted-surgery",
+          title: 'Joined the IMERSE Lab at Johns Hopkins as a graduate researcher, working on...',
+          description: "",
+          section: "News",},{id: "news-our-haptic-force-cepx-grip-feedback-device-won-best-demo-1st-place-in-jhu-haptic-interface-design",
+          title: 'Our Haptic Force-Cepx grip-feedback device won Best Demo, 1st place in JHU Haptic...',
+          description: "",
+          section: "News",},{id: "news-our-mpm-tissue-cutting-extended-abstract-was-presented-as-an-oral-at-the-hamlyn-symposium-on-medical-robotics-2026",
+          title: 'Our MPM tissue-cutting extended abstract was presented as an oral at the Hamlyn...',
+          description: "",
+          section: "News",},{id: "news-started-as-an-intern-in-surgical-simulation-at-inner-logic",
+          title: 'Started as an intern in surgical simulation at Inner Logic.',
+          description: "",
+          section: "News",},{id: "projects-real-time-mpm-tissue-cutting-simulation",
+          title: 'Real-time MPM Tissue Cutting Simulation',
+          description: "Predicting tissue deformation and electrosurgical cutting before the robot cuts · IMERSE Lab, JHU",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/01_mpm_tissue_cutting/";
+            },},{id: "projects-surgical-suturing-simulation",
+          title: 'Surgical Suturing Simulation',
+          description: "Deformation, cutting, needle insertion and knot tying in one real-time scene",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/02_suturing_sim/";
+            },},{id: "projects-differentiable-simulation-for-soft-tissue-cutting",
+          title: 'Differentiable Simulation for Soft Tissue Cutting',
+          description: "Inferring tissue stiffness and its uncertainty from observed cuts · Computer Integrated Surgery II",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/03_diff_sysid/";
+            },},{id: "projects-haptic-force-cepx",
+          title: 'Haptic Force‑Cepx',
+          description: "Real-time simulation and grip-feedback device for da Vinci surgical training · Best Demo, 1st place",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/04_haptic_forceps/";
+            },},{id: "projects-shunt-valve-artifact-and-catheter-length-in-mri",
+          title: 'Shunt Valve Artifact and Catheter Length in MRI',
+          description: "Deep learning artifact segmentation and active-snake catheter length estimation · Medical Image Analysis",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/04a_mri_catheter/";
+            },},{id: "projects-live-training-visualizer-for-brax",
+          title: 'Live Training Visualizer for Brax',
+          description: "Open-source developer, Google Summer of Code 2025 · PAL Robotics",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/05_brax_viewer/";
+            },},{id: "projects-real-time-blink-detection",
+          title: 'Real-time Blink Detection',
+          description: "Embedded eye tracking and cognitive-load sensing · ÉTS Montréal",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/06_blink_detection/";
+            },},{id: "projects-vision-guided-scara-pick-and-place",
+          title: 'Vision-Guided SCARA Pick-and-Place',
+          description: "Low-cost industrial arm with sub-millimeter repeatability · Shuangyuan Optoelectronics",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/09_scara/";
+            },},{id: "projects-hexapod-spider-robot",
+          title: 'Hexapod Spider Robot',
+          description: "Porting an open-source hexapod to Raspberry Pi, with redesigned parts and remote control · Personal project",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/10_hexapod/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%62%72%75%63%65.%73%68%6F%75%79%75%65.%68%75@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/bsyh", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/brucesh", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

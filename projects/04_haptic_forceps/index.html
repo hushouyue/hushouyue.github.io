@@ -1,0 +1,182 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Haptic Force‑Cepx | Shouyue (Bruce) Hu </title> <meta name="author" content="Shouyue (Bruce) Hu"> <meta name="description" content="Real-time simulation and grip-feedback device for da Vinci surgical training · Best Demo, 1st place"> <meta name="keywords" content="robotics, simulation, surgical robotics, soft tissue simulation, MPM, NVIDIA Warp, Johns Hopkins"> <meta property="og:site_name" content="Shouyue (Bruce) Hu"> <meta property="og:type" content="website"> <meta property="og:title" content="Shouyue (Bruce) Hu | Haptic Force‑Cepx"> <meta property="og:url" content="https://hushouyue.github.io/projects/04_haptic_forceps/"> <meta property="og:description" content="Real-time simulation and grip-feedback device for da Vinci surgical training · Best Demo, 1st place"> <meta property="og:image" content="https://hushouyue.github.io/assets/img/prof_pic.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Haptic Force‑Cepx"> <meta name="twitter:description" content="Real-time simulation and grip-feedback device for da Vinci surgical training · Best Demo, 1st place"> <meta name="twitter:image" content="https://hushouyue.github.io/assets/img/prof_pic.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Shouyue (Bruce) Hu"
+        },
+        "url": "https://hushouyue.github.io/projects/04_haptic_forceps/",
+        "@type": "WebSite",
+        "description": "Real-time simulation and grip-feedback device for da Vinci surgical training · Best Demo, 1st place",
+        "headline": "Haptic Force‑Cepx",
+        
+        "sameAs": ["https://github.com/bsyh","https://www.linkedin.com/in/brucesh"],
+        
+        "name": "Shouyue (Bruce) Hu",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.ico?v=62a0d6390d90498f27660e5dbfe1942a"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://hushouyue.github.io/projects/04_haptic_forceps/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Shouyue</span> (Bruce) Hu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/interests/">interests </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Haptic Force‑Cepx</h1> <p class="post-description">Real-time simulation and grip-feedback device for da Vinci surgical training · Best Demo, 1st place</p> </header> <article> <p><strong>Project lead, Haptic Interface Design, Johns Hopkins University</strong> · Sep. 2025 – Dec. 2025 · <strong>Best Demo Award, 1st place (of 14 teams)</strong> · <a href="/assets/pdf/haptic_force_cepx_report.pdf">Final report (PDF)</a></p> <p>Team: Shouyue Hu, August Phelps, Yuming Xu, Yuwei Liu. I built the simulation, the control algorithm, the two-loop design and the filtering; my teammates built the CAD and the low-level signal processing.</p> <div class="row justify-content-sm-center"> <div class="col-sm-10 mt-3 mt-md-0"> <figure> <video src="/assets/video/haptic_demo.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls="" loop="" muted=""></video> </figure> </div> </div> <div class="caption"> Squeezing the gripper grasps simulated tissue in SOFA; the motor pushes back with the tissue's reaction force. </div> <h3 id="motivation">Motivation</h3> <p>Robot-assisted surgery is precise and stable, but the surgeon teleoperates the instruments and loses the sense of touch. The da Vinci 5, for example, gives no force feedback when the surgeon squeezes the forceps. Too little grip and tissue slips; too much and delicate tissue is damaged. Prior studies show that grip-force feedback in particular helps users stay near the no-slip threshold, and that pairing haptic devices with physically based soft-tissue models improves surgical training. We set out to build a training system in which a surgeon squeezes a physical gripper, grasps simulated tissue, and feels the tissue’s reaction force in real time.</p> <h3 id="device">Device</h3> <div class="row justify-content-sm-center"> <div class="col-sm-8 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/haptic_setup-480.webp 480w,/assets/img/projects/haptic_setup-800.webp 800w,/assets/img/projects/haptic_setup-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/haptic_setup.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Grip device with simulation" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> The grip device (right) connected to the SOFA simulation of a da Vinci instrument grasping tissue (laptop). </div> <p>The device is kinesthetic: it acts on the muscle and joint receptors of the hand to create the feeling of squeezing soft tissue. It is built on a LILYGO T-Knob — an ESP32 with a brushless DC (BLDC) motor, a TMC6300 driver and an MT6701 magnetic encoder — with a 3D-printed lever in a direct-drive configuration. Direct drive avoids gear losses, so the gripper is highly backdrivable and feels almost free when not in contact. Motor torque is controlled with field-oriented control based on SimpleFOC.</p> <h3 id="two-control-loops">Two control loops</h3> <p>The physics simulation runs at only 100–200 Hz, but convincing haptic feedback needs 1 kHz or more. Sending the simulated force straight to the motor at the simulation rate makes the gripper jitter. Instead, the ESP32 runs a fast inner loop that renders a local spring–damper model,</p> \[F = -k\,(x - x_0) - b\,\dot{x},\] <p>and the simulation runs a slow outer loop that keeps updating \(k\), \(b\) and \(x_0\) to follow the tissue’s nonlinear behavior. This trades a little force accuracy for much better stability.</p> <div class="row justify-content-sm-center"> <div class="col-sm-10 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/haptic_block_diagram-480.webp 480w,/assets/img/projects/haptic_block_diagram-800.webp 800w,/assets/img/projects/haptic_block_diagram-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/haptic_block_diagram.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Control architecture" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> The SOFA simulation on the laptop sends spring–damper parameters to the ESP32, which renders them at ≥1 kHz on the motor; gripper position flows back to the simulation over serial. </div> <h3 id="from-simulation-to-springdamper">From simulation to spring–damper</h3> <p><strong>Contact force.</strong> The tissue is a finite-element model with linear elasticity in SOFA <a class="citation" href="#faure2012sofa">(Faure et al., 2012)</a>. To keep collision detection real time, the deforming surface is represented by proxy spheres instead of the full volumetric mesh. Contact and friction are solved as a linear complementarity problem; summing the constraint forces gives the grip force.</p> <div class="row justify-content-sm-center"> <div class="col-sm-8 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/haptic_proxy-480.webp 480w,/assets/img/projects/haptic_proxy-800.webp 800w,/assets/img/projects/haptic_proxy-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/haptic_proxy.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Proxy spheres" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> The instrument jaws grasping tissue represented by proxy spheres for fast contact detection. </div> <p><strong>Stiffness and damping.</strong> Each simulation step estimates the local stiffness from how the contact force changes with gripper position, \(K_\text{raw} = \lvert \Delta F / \Delta x \rvert\), smooths it with an exponential filter, and sets the damping to \(B = 2\sqrt{K\,m_v}\) for a virtual mass \(m_v\). When contact is lost, \(K\) decays smoothly rather than dropping to zero, so the release feels natural. The spring’s rest point follows from Hooke’s law, \(x_\text{proxy} = x + F/K\).</p> <p><strong>Force to torque.</strong> Simulated forces are mapped to motor torque through a saturating curve, \(\tau = \tau_\text{max}\tanh(a\,F/F_\text{max})\), which amplifies small forces — so the moment of contact is easy to feel — while keeping torque within the motor’s limit. Brief contact “bounces” caused by the discrete time step are filtered out. The whole pipeline is compiled C++ with a custom bit-level serial protocol, and communication runs decoupled from signal processing.</p> <h3 id="results">Results</h3> <p>The motor produces 0.031 N·m, or about 0.80 N at the 39 mm lever — enough for soft tissue, though harder structures such as bone would need more. With direct drive, friction and cogging are negligible, so free motion feels light. The mapped torque makes the onset and release of contact clearly perceptible, and the motor outputs zero torque when the gripper is still.</p> <div class="row justify-content-sm-center"> <div class="col-sm-8 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/haptic_force_torque-480.webp 480w,/assets/img/projects/haptic_force_torque-800.webp 800w,/assets/img/projects/haptic_force_torque-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/haptic_force_torque.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Force and torque" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> One squeeze of simulated liver: raw contact force from the simulator (black) and the processed torque sent to the motor (orange). </div> <h3 id="next-steps">Next steps</h3> <p>The simulation already computes force on each jaw separately; the prototype renders their average because it has a single motor. Independent jaws would need a second motor and encoder. The same two-loop design could add force feedback in more degrees of freedom by mounting the gripper on a multi-DOF device. We also designed a user study comparing visual-only and visual-plus-haptic feedback on a grasp-and-pull task, measuring grip force, accuracy and completion time.</p> <h4 id="references">References</h4> <div class="publications"> <ol class="bibliography"><li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="faure2012sofa" class="col-sm-8"> <div class="title">SOFA: A Multi-Model Framework for Interactive Physical Simulation</div> <div class="author"> François Faure, Christian Duriez, Hervé Delingette, Jérémie Allard, Benjamin Gilles, Stéphanie Marchesseau, Hugo Talbot, Hadrien Courtecuisse, Guillaume Bousquet, Igor Peterlik, and others </div> <div class="periodical"> <em>In Soft Tissue Biomechanical Modeling for Computer Assisted Surgery</em>, 2012 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li></ol> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Shouyue (Bruce) Hu. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-projects",
+          title: "projects",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-interests",
+          title: "interests",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/interests/";
+          },
+        },{id: "news-my-live-training-viewer-for-brax-built-with-pal-robotics-during-google-summer-of-code-2025-was-released-as-open-source",
+          title: 'My live training viewer for Brax, built with PAL Robotics during Google Summer...',
+          description: "",
+          section: "News",},{id: "news-started-the-robotics-mse-program-at-johns-hopkins-university",
+          title: 'Started the Robotics MSE program at Johns Hopkins University.',
+          description: "",
+          section: "News",},{id: "news-joined-the-imerse-lab-at-johns-hopkins-as-a-graduate-researcher-working-on-soft-tissue-physics-simulation-for-robot-assisted-surgery",
+          title: 'Joined the IMERSE Lab at Johns Hopkins as a graduate researcher, working on...',
+          description: "",
+          section: "News",},{id: "news-our-haptic-force-cepx-grip-feedback-device-won-best-demo-1st-place-in-jhu-haptic-interface-design",
+          title: 'Our Haptic Force-Cepx grip-feedback device won Best Demo, 1st place in JHU Haptic...',
+          description: "",
+          section: "News",},{id: "news-our-mpm-tissue-cutting-extended-abstract-was-presented-as-an-oral-at-the-hamlyn-symposium-on-medical-robotics-2026",
+          title: 'Our MPM tissue-cutting extended abstract was presented as an oral at the Hamlyn...',
+          description: "",
+          section: "News",},{id: "news-started-as-an-intern-in-surgical-simulation-at-inner-logic",
+          title: 'Started as an intern in surgical simulation at Inner Logic.',
+          description: "",
+          section: "News",},{id: "projects-real-time-mpm-tissue-cutting-simulation",
+          title: 'Real-time MPM Tissue Cutting Simulation',
+          description: "Predicting tissue deformation and electrosurgical cutting before the robot cuts · IMERSE Lab, JHU",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/01_mpm_tissue_cutting/";
+            },},{id: "projects-surgical-suturing-simulation",
+          title: 'Surgical Suturing Simulation',
+          description: "Deformation, cutting, needle insertion and knot tying in one real-time scene",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/02_suturing_sim/";
+            },},{id: "projects-differentiable-simulation-for-soft-tissue-cutting",
+          title: 'Differentiable Simulation for Soft Tissue Cutting',
+          description: "Inferring tissue stiffness and its uncertainty from observed cuts · Computer Integrated Surgery II",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/03_diff_sysid/";
+            },},{id: "projects-haptic-force-cepx",
+          title: 'Haptic Force‑Cepx',
+          description: "Real-time simulation and grip-feedback device for da Vinci surgical training · Best Demo, 1st place",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/04_haptic_forceps/";
+            },},{id: "projects-shunt-valve-artifact-and-catheter-length-in-mri",
+          title: 'Shunt Valve Artifact and Catheter Length in MRI',
+          description: "Deep learning artifact segmentation and active-snake catheter length estimation · Medical Image Analysis",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/04a_mri_catheter/";
+            },},{id: "projects-live-training-visualizer-for-brax",
+          title: 'Live Training Visualizer for Brax',
+          description: "Open-source developer, Google Summer of Code 2025 · PAL Robotics",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/05_brax_viewer/";
+            },},{id: "projects-real-time-blink-detection",
+          title: 'Real-time Blink Detection',
+          description: "Embedded eye tracking and cognitive-load sensing · ÉTS Montréal",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/06_blink_detection/";
+            },},{id: "projects-vision-guided-scara-pick-and-place",
+          title: 'Vision-Guided SCARA Pick-and-Place',
+          description: "Low-cost industrial arm with sub-millimeter repeatability · Shuangyuan Optoelectronics",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/09_scara/";
+            },},{id: "projects-hexapod-spider-robot",
+          title: 'Hexapod Spider Robot',
+          description: "Porting an open-source hexapod to Raspberry Pi, with redesigned parts and remote control · Personal project",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/10_hexapod/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%62%72%75%63%65.%73%68%6F%75%79%75%65.%68%75@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/bsyh", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/brucesh", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
