@@ -1,0 +1,182 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Surgical Suturing Simulation | Shouyue (Bruce) Hu </title> <meta name="author" content="Shouyue (Bruce) Hu"> <meta name="description" content="Deformation, cutting, needle insertion and knot tying in one real-time scene"> <meta name="keywords" content="robotics, simulation, surgical robotics, soft tissue simulation, MPM, NVIDIA Warp, Johns Hopkins"> <meta property="og:site_name" content="Shouyue (Bruce) Hu"> <meta property="og:type" content="website"> <meta property="og:title" content="Shouyue (Bruce) Hu | Surgical Suturing Simulation"> <meta property="og:url" content="https://hushouyue.github.io/projects/02_suturing_sim/"> <meta property="og:description" content="Deformation, cutting, needle insertion and knot tying in one real-time scene"> <meta property="og:image" content="https://hushouyue.github.io/assets/img/prof_pic.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Surgical Suturing Simulation"> <meta name="twitter:description" content="Deformation, cutting, needle insertion and knot tying in one real-time scene"> <meta name="twitter:image" content="https://hushouyue.github.io/assets/img/prof_pic.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Shouyue (Bruce) Hu"
+        },
+        "url": "https://hushouyue.github.io/projects/02_suturing_sim/",
+        "@type": "WebSite",
+        "description": "Deformation, cutting, needle insertion and knot tying in one real-time scene",
+        "headline": "Surgical Suturing Simulation",
+        
+        "sameAs": ["https://github.com/bsyh","https://www.linkedin.com/in/brucesh"],
+        
+        "name": "Shouyue (Bruce) Hu",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.ico?v=62a0d6390d90498f27660e5dbfe1942a"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://hushouyue.github.io/projects/02_suturing_sim/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Shouyue</span> (Bruce) Hu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/interests/">interests </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Surgical Suturing Simulation</h1> <p class="post-description">Deformation, cutting, needle insertion and knot tying in one real-time scene</p> </header> <article> <p>The simulated robot is modeled on ARTS <a class="citation" href="#ge2026arts">(Ge et al., 2026)</a>, an open-source three-arm platform for surgical autonomy research. Robot, instruments and tissue are rendered as simplified stand-in geometry.</p> <div class="row justify-content-sm-center"> <div class="col-sm-12 mt-3 mt-md-0"> <figure> <video src="/assets/video/suture_showcase.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls="" loop="" muted=""></video> </figure> </div> </div> <div class="caption"> A complete incision-and-suture procedure. The skin starts under pre-tension, which pulls the incision open; the pre-tension is released at wound closure. Insets: robot cell and tissue strain. Plot: wound opening over time. </div> <ul> <li>GPU physics engine for surgical simulation, built on NVIDIA Warp <a class="citation" href="#macklin2022warp">(Macklin, 2022)</a> / Newton; runs in real time under teleoperation.</li> <li>Soft tissue, suture thread, needle and instruments interact through contact.</li> <li>Used to generate synthetic data and to train reinforcement learning and imitation learning policies for autonomous suturing.</li> </ul> <h4 id="individual-scenes">Individual scenes</h4> <div class="row"> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/assets/video/suture_gape.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls="" loop="" muted=""></video> </figure> </div> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/assets/video/suture_pinch.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls="" loop="" muted=""></video> </figure> </div> </div> <div class="caption"> Left: an incision in pre-stretched skin; tension pulls the wound open (blue: skin relaxing, red: stretching). Right: grasping and retracting soft tissue. </div> <div class="row"> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/assets/video/suture_needle.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls="" loop="" muted=""></video> </figure> </div> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/assets/video/suture_knot.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls="" loop="" muted=""></video> </figure> </div> </div> <div class="caption"> Left: driving a curved needle through both wound edges. Right: an instrument tie with two needle drivers. </div> <h4 id="references">References</h4> <div class="publications"> <ol class="bibliography"><li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100">arXiv</abbr> </div> <div id="ge2026arts" class="col-sm-8"> <div class="title">ARTS: An Open-Source, Reproducible Three-Arm Platform for Autonomy Research in Minimally Invasive Surgery</div> <div class="author"> Jiawei Ge, Chunwoo Kim, Antony Goldenberg, Douglas McDonough, Justin Liao, Bo Ning, Sylvia Ladstaetter, Katya Van Anderlecht, Hao Ding, Laura Connolly, Ethan Kilmer, Francis Fan, <em>Shouyue Hu</em>, Tyler Salvador, Brendan Burkhart, Pit Henrich, Richard Cha, Tito Porras, Mathias Unberath, Kevin Cleary, and Axel Krieger </div> <div class="periodical"> <em>arXiv preprint arXiv:2611.15135</em>, 2026 </div> <div class="periodical"> Preprint. I contributed the simulation </div> <div class="links"> <a href="http://arxiv.org/abs/2611.15135" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">arXiv</a> </div> </div> </div> </li></ol> <ol class="bibliography"><li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="macklin2022warp" class="col-sm-8"> <div class="title">Warp: A High-performance Python Framework for GPU Simulation and Graphics</div> <div class="author"> Miles Macklin </div> <div class="periodical"> 2022 </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li></ol> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Shouyue (Bruce) Hu. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-projects",
+          title: "projects",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-interests",
+          title: "interests",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/interests/";
+          },
+        },{id: "news-my-live-training-viewer-for-brax-built-with-pal-robotics-during-google-summer-of-code-2025-was-released-as-open-source",
+          title: 'My live training viewer for Brax, built with PAL Robotics during Google Summer...',
+          description: "",
+          section: "News",},{id: "news-started-the-robotics-mse-program-at-johns-hopkins-university",
+          title: 'Started the Robotics MSE program at Johns Hopkins University.',
+          description: "",
+          section: "News",},{id: "news-joined-the-imerse-lab-at-johns-hopkins-as-a-graduate-researcher-working-on-soft-tissue-physics-simulation-for-robot-assisted-surgery",
+          title: 'Joined the IMERSE Lab at Johns Hopkins as a graduate researcher, working on...',
+          description: "",
+          section: "News",},{id: "news-our-haptic-force-cepx-grip-feedback-device-won-best-demo-1st-place-in-jhu-haptic-interface-design",
+          title: 'Our Haptic Force-Cepx grip-feedback device won Best Demo, 1st place in JHU Haptic...',
+          description: "",
+          section: "News",},{id: "news-our-mpm-tissue-cutting-extended-abstract-was-presented-as-an-oral-at-the-hamlyn-symposium-on-medical-robotics-2026",
+          title: 'Our MPM tissue-cutting extended abstract was presented as an oral at the Hamlyn...',
+          description: "",
+          section: "News",},{id: "news-started-as-an-intern-in-surgical-simulation-at-inner-logic",
+          title: 'Started as an intern in surgical simulation at Inner Logic.',
+          description: "",
+          section: "News",},{id: "projects-real-time-mpm-tissue-cutting-simulation",
+          title: 'Real-time MPM Tissue Cutting Simulation',
+          description: "Predicting tissue deformation and electrosurgical cutting before the robot cuts · IMERSE Lab, JHU",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/01_mpm_tissue_cutting/";
+            },},{id: "projects-surgical-suturing-simulation",
+          title: 'Surgical Suturing Simulation',
+          description: "Deformation, cutting, needle insertion and knot tying in one real-time scene",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/02_suturing_sim/";
+            },},{id: "projects-differentiable-simulation-for-soft-tissue-cutting",
+          title: 'Differentiable Simulation for Soft Tissue Cutting',
+          description: "Inferring tissue stiffness and its uncertainty from observed cuts · Computer Integrated Surgery II",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/03_diff_sysid/";
+            },},{id: "projects-haptic-force-cepx",
+          title: 'Haptic Force‑Cepx',
+          description: "Real-time simulation and grip-feedback device for da Vinci surgical training · Best Demo, 1st place",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/04_haptic_forceps/";
+            },},{id: "projects-shunt-valve-artifact-and-catheter-length-in-mri",
+          title: 'Shunt Valve Artifact and Catheter Length in MRI',
+          description: "Deep learning artifact segmentation and active-snake catheter length estimation · Medical Image Analysis",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/04a_mri_catheter/";
+            },},{id: "projects-live-training-visualizer-for-brax",
+          title: 'Live Training Visualizer for Brax',
+          description: "Open-source developer, Google Summer of Code 2025 · PAL Robotics",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/05_brax_viewer/";
+            },},{id: "projects-real-time-blink-detection",
+          title: 'Real-time Blink Detection',
+          description: "Embedded eye tracking and cognitive-load sensing · ÉTS Montréal",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/06_blink_detection/";
+            },},{id: "projects-vision-guided-scara-pick-and-place",
+          title: 'Vision-Guided SCARA Pick-and-Place',
+          description: "Low-cost industrial arm with sub-millimeter repeatability · Shuangyuan Optoelectronics",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/09_scara/";
+            },},{id: "projects-hexapod-spider-robot",
+          title: 'Hexapod Spider Robot',
+          description: "Porting an open-source hexapod to Raspberry Pi, with redesigned parts and remote control · Personal project",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/10_hexapod/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%62%72%75%63%65.%73%68%6F%75%79%75%65.%68%75@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/bsyh", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/brucesh", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
